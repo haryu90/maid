@@ -30,12 +30,9 @@ def has_role_id(role_id: int):
     return commands.check(predicate)
 
 
-# 예시 역할 ID (실제 역할 ID로 바꿔주세요)
-운영진_역할_ID = 1381621262345965610
 
 
 @bot.command()
-@has_role_id(운영진_역할_ID)
 async def 환영(ctx, *members: discord.Member):
     if len(members) == 0:
         await ctx.send("❗ 최소 1명에서 최대 3명까지 멘션해주세요!")
@@ -54,12 +51,6 @@ async def 환영(ctx, *members: discord.Member):
         f"<:3141coquettebow:1381626675489669220>  앞으로 잘 부탁드려요!\n"
         f" <@&1381205970163732490> ")
     await ctx.send(message)
-
-
-@환영.error
-async def 환영_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("🚫 이 명령어를 실행할 권한이 없어요!")
 
 
 bot.run(os.environ['TOKEN2'])
