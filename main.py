@@ -34,6 +34,9 @@ async def on_ready():
 async def on_voice_state_update(member, before, after):
     if after.channel and not before.channel:  # 음성 채널에 입장했을 때
         voice_channel_users[member.id] = True
+        # 음성 채널에 입장할 때 해당 사용자의 점수를 초기화
+        if member.id not in user_scores:
+            user_scores[member.id] = 0
     elif before.channel and not after.channel:  # 음성 채널을 나갔을 때
         if member.id in voice_channel_users:
             del voice_channel_users[member.id]
@@ -79,3 +82,4 @@ async def 환영(ctx, *members: discord.Member):
     await ctx.send(message)
 
 bot.run(os.environ['TOKEN2'])
+
